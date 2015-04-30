@@ -139,7 +139,7 @@ void request_thread(std::pair<int,int> input)
 			continue;
 		}
 		state_lock[node_id].unlock();
-		//usleep(next_req);
+		usleep(next_req);
 		message m;
 		state_lock[node_id].lock();
 		states[node_id]=WANTED;
@@ -190,7 +190,7 @@ void node_thread(std::pair<int,int> input)
 			{
 				time_t timestamp=std::chrono::system_clock::to_time_t (std::chrono::system_clock::now());
 				//print_lock.lock();
-				cout<<ctime(&timestamp)<<" to "<<node_id<<" from "<<m.src;
+				cout<<ctime(&timestamp)<<" "<<node_id<<" "<<m.src;
 			}
 			switch(m.command)
 			{
@@ -234,7 +234,7 @@ void node_thread(std::pair<int,int> input)
 						seperate_counts[node_id]+=1;
 						time_t timestamp=std::chrono::system_clock::to_time_t (std::chrono::system_clock::now());
 						cout<<ctime(&timestamp);
-						cout<<" "<<node_id<<" held, voted by ";
+						cout<<" "<<node_id<<" ";
 						for (int i = 0; i < 5; ++i)
 						{
 							cout<<voters[i]<<" ";
