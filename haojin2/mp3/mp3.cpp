@@ -40,6 +40,11 @@ mutex state_lock[10];
 queue<message> channels[10];
 int cs_count=0;
 
+// voting_set(int node_id, vector<int> & voters)
+// calculate the minimal voting set according to the node_id
+// input: node_id -- identifier of node
+// 		  voters -- vector of identifiers of voters
+// output: none
 void voting_set(int node_id,std::vector<int> & voters)
 {
 	voters.push_back(node_id);
@@ -120,6 +125,10 @@ void voting_set(int node_id,std::vector<int> & voters)
 	}
 }
 
+// request_thread(pair<int,int> input)
+// the thread in charge of sending requests
+// input: input -- pair of integer (node_id,next_req)
+// output: none
 void request_thread(std::pair<int,int> input)
 {
 	int node_id=input.first;
@@ -155,6 +164,10 @@ void request_thread(std::pair<int,int> input)
 	}
 }
 
+// node_thread(pair<int,int> input)
+// the thread in charge of processing requests
+// input: input -- pair of integer (node_id,cs_int)
+// output: none
 void node_thread(std::pair<int,int> input)
 {
 	int node_id=input.first;
@@ -287,6 +300,11 @@ void node_thread(std::pair<int,int> input)
 	}
 }
 
+// main(int argc, char** argv)
+// main thread, initialization and termination of the system
+// input: argc -- argument count from terminal
+// 		  argv -- vector of arguments
+// output: 0 on success, 1 on failure
 int main(int argc,char** argv)
 {
 	if (argc!=5)
