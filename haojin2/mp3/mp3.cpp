@@ -139,7 +139,7 @@ void request_thread(std::pair<int,int> input)
 			continue;
 		}
 		state_lock[node_id].unlock();
-		usleep(next_req);
+		usleep(next_req*1000);
 		message m;
 		state_lock[node_id].lock();
 		states[node_id]=WANTED;
@@ -242,7 +242,7 @@ void node_thread(std::pair<int,int> input)
 						cout<<endl;
 						//print_lock.unlock();
 						queue_lock.unlock();
-						usleep(cs_int);
+						usleep(cs_int*1000);
 						state_lock[node_id].lock();
 						states[node_id]=RELEASED;
 						state_lock[node_id].unlock();
